@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weverton & Priscila — Avaliação, Compra, Venda e Aluguel</title>
+  <meta name="description" content="Solicite avaliação, compre, venda ou alugue com atendimento direto no WhatsApp. Imóveis na planta, fazendas e áreas. Atendimento com Weverton e Priscila." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Weverton & Priscila — Atendimento Imobiliário" />
+  <meta property="og:description" content="Avaliação • Compra • Venda • Aluguel • Planta • Fazendas • Áreas — Atendimento direto no WhatsApp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="img/hero.jpg" />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --card:#ffffff;
+      --text:#0b0b0b;
+      --muted:#4b5563;
+      --line:rgba(0,0,0,.10);
+      --shadow: 0 14px 40px rgba(0,0,0,.10);
+      --radius: 18px;
+
+      --green:#16a34a;   /* botões principais */
+      --green2:#22c55e;  /* hover */
+      --red:#dc2626;     /* botões "quentes" (ex: vender) */
+      --red2:#ef4444;    /* hover */
+      --soft:#f7f7f7;    /* fundos suaves */
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1100px; margin:0 auto; padding:22px}
+
+    .topbar{
+      display:flex; gap:14px; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:46px; height:46px; border-radius:12px;
+      border:1px solid var(--line);
+      background: var(--soft);
+      display:grid; place-items:center;
+      font-weight:900; color:#111;
+      overflow:hidden;
+    }
+    .logo img{width:100%; height:100%; object-fit:cover}
+    .brand h1{font-size:14px; margin:0; letter-spacing:.2px}
+    .brand p{margin:0; color:var(--muted); font-size:12px}
+
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .pill{
+      border:1px solid var(--line);
+      background: var(--soft);
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      margin-top:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .pillrow{justify-content:flex-start}
+    }
+
+    .heroCard{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .heroMedia{
+      min-height: 340px;
+      background: #eaeaea;
+      position:relative;
+      overflow:hidden;
+    }
+    .heroMedia img{
+      width:100%; height:100%;
+      object-fit:cover;
+    }
+    .overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.72) 55%, rgba(255,255,255,.35) 100%);
+    }
+    .heroContent{
+      position:absolute; inset:0;
+      padding:22px;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      gap:12px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color: var(--muted);
+      font-size:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      padding:8px 10px;
+      border-radius:999px;
+      width:fit-content;
+    }
+    .heroTitle{
+      margin:0;
+      font-size:34px;
+      line-height:1.08;
+      letter-spacing:-.6px;
+      color: var(--text);
+    }
+    @media(max-width: 520px){
+      .heroTitle{font-size:28px}
+    }
+    .heroSub{
+      margin:0;
+      color: var(--muted);
+      font-size:14px;
+      max-width: 60ch;
+      line-height:1.55;
+    }
+    .ctaRow{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:6px;
+    }
+
+    .btn{
+      border:1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      padding:12px 14px;
+      border-radius: 14px;
+      display:inline-flex; align-items:center; gap:10px;
+      font-weight:800;
+      font-size:13px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease, color .12s ease;
+      cursor:pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: var(--soft); border-color: rgba(0,0,0,.18)}
+    .btn.primary{
+      background: var(--green);
+      border-color: var(--green);
+      color:#fff;
+    }
+    .btn.primary:hover{background: var(--green2); border-color: var(--green2)}
+    .btn.danger{
+      background: var(--red);
+      border-color: var(--red);
+      color:#fff;
+    }
+    .btn.danger:hover{background: var(--red2); border-color: var(--red2)}
+
+    .sideCard{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .sideCard h2{margin:0; font-size:16px}
+    .sideCard p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+
+    .people{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    @media (max-width: 560px){ .people{grid-template-columns:1fr} }
+
+    .person{
+      border:1px solid var(--line);
+      background: var(--soft);
+      border-radius: 16px;
+      padding:12px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .avatar{
+      width:62px; height:62px;
+      border-radius:16px;
+      overflow:hidden;
+      flex:0 0 auto;
+      border:1px solid rgba(0,0,0,.12);
+      background:#eee;
+    }
+    .avatar img{width:100%; height:100%; object-fit:cover}
+    .person strong{display:block; font-size:13px}
+    .person span{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+    }
+    .card{
+      grid-column: span 6;
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    @media(max-width: 860px){ .card{grid-column: span 12;} }
+
+    .card h3{margin:0; font-size:15px}
+    .card p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+
+    .tagRow{display:flex; gap:8px; flex-wrap:wrap}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: var(--soft);
+      color:var(--muted);
+    }
+
+    .miniMedia{
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.10);
+      background:#eee;
+      height: 170px;
+    }
+    .miniMedia img{width:100%; height:100%; object-fit:cover}
+
+    .form{
+      margin-top:18px;
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    .formHead{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      margin-bottom:12px;
+    }
+    .formHead h3{margin:0; font-size:15px}
+    .formHead p{margin:0; color:var(--muted); font-size:13px}
+
+    .row{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:10px;
+    }
+    .field{grid-column: span 6; display:flex; flex-direction:column; gap:6px}
+    .field.full{grid-column: span 12}
+    @media(max-width: 720px){ .field{grid-column: span 12} }
+
+    label{font-size:12px; color:var(--muted)}
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(0,0,0,.15);
+      background: #fff;
+      color: var(--text);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(22,163,74,.55);
+      box-shadow: 0 0 0 4px rgba(22,163,74,.12);
+    }
+    textarea{min-height: 90px; resize:vertical}
+
+    .foot{
+      margin-top:16px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .contactLine{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .contactLine a{border-bottom:1px dashed rgba(0,0,0,.35)}
+
+    .divider{margin:18px 0; height:1px; background: rgba(0,0,0,.08)}
+
+    /* WhatsApp floating button */
+    .waFloat{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius: 999px;
+      background: var(--green);
+      color:#fff;
+      font-weight:900;
+      box-shadow: 0 16px 40px rgba(0,0,0,.18);
+      border: 1px solid rgba(0,0,0,.08);
+    }
+    .waFloat:hover{background: var(--green2)}
+    .waFloat small{font-weight:800; opacity:.9}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-label="Logo">
+          <img src="img/logo.png" alt="Logo" onerror="this.remove(); this.parentNode.textContent='W';" />
+        </div>
+        <div>
+          <h1>Weverton & Priscila — Atendimento Imobiliário</h1>
+          <p>Avaliação • Compra • Venda • Aluguel • Planta • Fazendas • Áreas</p>
+        </div>
+      </div>
+
+      <div class="pillrow">
+        <span class="pill">📍 Atendimento rápido</span>
+        <span class="pill">✅ Direto no WhatsApp</span>
+        <span class="pill">🏡 Imóveis & Terras</span>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="heroCard">
+        <div class="heroMedia">
+          <img src="img/hero.jpg" alt="Imagem de capa - imóveis e oportunidades">
+          <div class="overlay"></div>
+          <div class="heroContent">
+            <span class="kicker">📲 Clique, escolha o objetivo, e fale com a gente agora</span>
+            <h2 class="heroTitle">Captação inteligente.<br/>Atendimento direto.</h2>
+            <p class="heroSub">
+              Em poucos cliques você inicia a conversa certa: avaliação, compra, venda, aluguel,
+              imóvel na planta, fazenda ou áreas. Eu e Priscila atendemos pelo WhatsApp.
+            </p>
+
+            <div class="ctaRow">
+              <button class="btn primary" onclick="goWA('Solicitar Avaliação')">📌 Solicitar Avaliação</button>
+              <button class="btn primary" onclick="goWA('Quero alugar um imóvel')">🏠 Alugar Imóvel</button>
+              <button class="btn primary" onclick="goWA('Quero comprar um imóvel')">🔎 Comprar Imóvel</button>
+              <button class="btn danger" onclick="goWA('Estou vendendo um imóvel')">🏷️ Vender Imóvel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sideCard">
+        <h2>Eu e Priscila disponíveis para atendimento</h2>
+        <p>
+          Nosso foco é transformar seu pedido em próxima ação: entender cenário, validar dados e
+          te orientar no caminho mais rápido (e seguro) para fechar.
+        </p>
+
+        <div class="people">
+          <div class="person">
+            <div class="avatar"><img src="img/weverton.jpg" alt="Foto de Weverton"></div>
+            <div>
+              <strong>Weverton Mendes</strong>
+              <span>Corretor • Avaliação • Corretagem</span>
+            </div>
+          </div>
+          <div class="person">
+            <div class="avatar"><img src="img/priscila.jpg" alt="Foto de Priscila"></div>
+            <div>
+              <strong>Priscila</strong>
+              <span>Atendimento • Suporte • Operação</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="contactLine">
+          <span>📧 <a href="mailto:peritowevertonmendes@gmail.com">peritowevertonmendes@gmail.com</a></span>
+          <span>•</span>
+          <span>💬 <a href="#" onclick="goWA('Quero atendimento agora'); return false;">WhatsApp</a></span>
+        </div>
+
+        <p style="margin-top:8px; font-size:12px; color:var(--muted);">
+          Use essa página como link da bio (Instagram) e como destino de anúncios (Google/Meta).
+        </p>
+      </aside>
+    </section>
+
+    <section class="grid" aria-label="Serviços">
+
+      <div class="card">
+        <div class="miniMedia"><img src="img/rent.jpg" alt="Imóveis para aluguel"></div>
+        <h3>Aluguel de imóveis</h3>
+        <p>
+          Quer alugar ou colocar seu imóvel para locação? Informe cidade, valor máximo e tipo de imóvel.
+        </p>
+        <div class="tagRow">
+          <span class="tag">Residencial</span><span class="tag">Comercial</span><span class="tag">Renda recorrente</span>
+        </div>
+        <div class="ctaRow">
+          <button class="btn primary" onclick="goWA('Quero alugar um imóvel (informe cidade, bairro e orçamento)')">🏠 Quero alugar</button>
+          <button class="btn danger" onclick="goWA('Quero colocar meu imóvel para aluguel (enviar endereço e detalhes)')">📄 Colocar para alugar</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="miniMedia"><img src="img/plant.jpg" alt="Imóveis na planta"></div>
+        <h3>Imóveis na planta</h3>
+        <p>
+          Quer receber opções e condições? Envie cidade, bairro, faixa de preço e objetivo (morar ou investir).
+        </p>
+        <div class="tagRow">
+          <span class="tag">Entrada</span><span class="tag">Parcelamento</span><span class="tag">Investimento</span>
+        </div>
+        <div class="ctaRow">
+          <button class="btn primary" onclick="goWA('Quero imóveis na planta (informar cidade, bairro e faixa de preço)')">📩 Quero na planta</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="miniMedia"><img src="img/farm.jpg" alt="Fazendas"></div>
+        <h3>Fazendas</h3>
+        <p>
+          Busca fazenda para produção, investimento ou lazer? Informe região, tamanho (ha) e faixa de preço.
+        </p>
+        <div class="tagRow">
+          <span class="tag">Agronegócio</span><span class="tag">Investimento</span><span class="tag">Documentação</span>
+        </div>
+        <div class="ctaRow">
+          <button class="btn primary" onclick="goWA('Quero fazenda (informar região e tamanho em ha)')">🌾 Buscar fazenda</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="miniMedia"><img src="img/area.jpg" alt="Áreas e terrenos"></div>
+        <h3>Áreas / Terrenos</h3>
+        <p>
+          Áreas para incorporação, loteamento, industrial ou comercial. Informe metragem, cidade e finalidade.
+        </p>
+        <div class="tagRow">
+          <span class="tag">Área urbana</span><span class="tag">Terreno</span><span class="tag">Incorporação</span>
+        </div>
+        <div class="ctaRow">
+          <button class="btn primary" onclick="goWA('Busco áreas/terrenos (informar cidade, metragem e finalidade)')">🧭 Buscar áreas</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Compra e Venda (rápido e objetivo)</h3>
+        <p>
+          Quer comprar ou vender? Mande o essencial e a gente te guia no próximo passo com clareza.
+          Menos conversa aleatória, mais direção.
+        </p>
+        <div class="tagRow">
+          <span class="tag">Agilidade</span><span class="tag">Clareza</span><span class="tag">Próximo passo</span>
+        </div>
+        <div class="ctaRow">
+          <button class="btn primary" onclick="goWA('Quero comprar um imóvel (informe cidade, bairro e orçamento)')">🛒 Comprar</button>
+          <button class="btn danger" onclick="goWA('Quero vender um imóvel (informe endereço, metragem e detalhes)')">🏷️ Vender</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="miniMedia"><img src="img/hero.jpg" alt="Avaliação imobiliária"></div>
+        <h3>Solicitar Avaliação</h3>
+        <p>
+          Precisa de uma avaliação para vender, financiamento, inventário ou decisão estratégica?
+          Envie endereço, tipo do imóvel e metragem.
+        </p>
+        <div class="tagRow">
+          <span class="tag">Vender melhor</span><span class="tag">Segurança</span><span class="tag">Estratégia</span>
+        </div>
+        <div class="ctaRow">
+          <button class="btn primary" onclick="goWA('Solicitar Avaliação (enviar endereço, tipo e metragem)')">📌 Solicitar agora</button>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="form" aria-label="Enviar dados e abrir WhatsApp">
+      <div class="formHead">
+        <div>
+          <h3>Enviar dados (opcional) e abrir WhatsApp</h3>
+          <p>Preencha o básico e a mensagem já sai pronta no WhatsApp.</p>
+        </div>
+        <button class="btn primary" onclick="sendFromForm()">📲 Montar mensagem</button>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input id="nome" placeholder="Seu nome" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="tel">Telefone</label>
+          <input id="tel" placeholder="+55 / +44" autocomplete="tel" />
+        </div>
+
+        <div class="field">
+          <label for="objetivo">Objetivo</label>
+          <select id="objetivo">
+            <option value="Solicitar Avaliação">Solicitar Avaliação</option>
+            <option value="Quero alugar um imóvel">Quero alugar imóvel</option>
+            <option value="Quero colocar meu imóvel para aluguel">Colocar imóvel para aluguel</option>
+            <option value="Quero comprar um imóvel">Quero comprar imóvel</option>
+            <option value="Quero vender um imóvel">Quero vender imóvel</option>
+            <option value="Quero imóveis na planta">Imóveis na planta</option>
+            <option value="Quero fazenda (informar região e tamanho em ha)">Fazenda</option>
+            <option value="Busco áreas/terrenos (informar cidade, metragem e finalidade)">Áreas / Terrenos</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="cidade">Cidade / Região</label>
+          <input id="cidade" placeholder="Ex: Goiânia, Setor Bueno..." />
+        </div>
+
+        <div class="field full">
+          <label for="msg">Detalhes</label>
+          <textarea id="msg" placeholder="Ex: 3 quartos, até R$ X, bairro Y / ou endereço, metragem, finalidade, etc."></textarea>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="contactLine">
+          <span>WhatsApp: <strong>+55 62 99871-4396</strong></span>
+          <span>•</span>
+          <span>Email: <a href="mailto:peritowevertonmendes@gmail.com">peritowevertonmendes@gmail.com</a></span>
+        </div>
+        <span>© <span id="year"></span> — Weverton & Priscila</span>
+      </div>
+    </section>
+  </div>
+
+  <a class="waFloat" href="#" onclick="goWA('Quero atendimento agora'); return false;" aria-label="Abrir WhatsApp">
+    💬 <span>WhatsApp</span> <small>Atendimento</small>
+  </a>
+
+  <script>
+    const WA_NUMBER = "5562998714396"; // sem +, sem espaços
+
+    function waUrl(text){
+      const base = "https://wa.me/" + WA_NUMBER;
+      const msg = encodeURIComponent(text);
+      return base + "?text=" + msg;
+    }
+
+    function goWA(context){
+      const text =
+`Olá! Vim pela sua landing page (Weverton & Priscila).
+Objetivo: ${context}
+
+Pode me atender por aqui?`;
+      window.open(waUrl(text), "_blank", "noopener,noreferrer");
+    }
+
+    function sendFromForm(){
+      const nome = (document.getElementById("nome").value || "").trim();
+      const tel = (document.getElementById("tel").value || "").trim();
+      const objetivo = document.getElementById("objetivo").value;
+      const cidade = (document.getElementById("cidade").value || "").trim();
+      const detalhes = (document.getElementById("msg").value || "").trim();
+
+      const text =
+`Olá! Vim pela sua landing page (Weverton & Priscila).
+${nome ? "Nome: " + nome + "\n" : ""}${tel ? "Telefone: " + tel + "\n" : ""}${cidade ? "Cidade/Região: " + cidade + "\n" : ""}
+Objetivo: ${objetivo}
+
+Detalhes:
+${detalhes || "(vou explicar agora no chat)"}
+
+Pode me atender por aqui?`;
+
+      window.open(waUrl(text), "_blank", "noopener,noreferrer");
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
